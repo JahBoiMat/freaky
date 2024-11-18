@@ -1,1 +1,1 @@
-Velkommen til mitt prosjekt.
+Velkommen, her tester jeg tilfeldige prosjekter.
