@@ -78,9 +78,22 @@
         .right-arrow {
             right: 10px;
         }
+        .group-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+    <!-- Group Buttons -->
+    <div class="group-buttons">
+        <button id="button1">Sonic</button>
+        <button id="button2">Knuckles</button>
+        <button id="button3">Tails</button>
+        <button id="button4">Shadow</button>
+    </div>
+
     <div class="carousel-container">
         <!-- Left Arrow -->
         <button class="arrow left-arrow" id="prev">&lt;</button>
@@ -119,54 +132,73 @@
         const stopButton = document.getElementById('stop');
         const soundSelect = document.getElementById('sound-select');
 
-        // Array of image filenames from sonic.jpg to sonic8.jpg
-        const images = [
-            'sonic.jpg', 'sonic2.jpg', 'sonic3.jpg', 'sonic4.jpg',
-            'sonic5.jpg', 'sonic6.jpg', 'sonic7.jpg'
-        ];
+        // Image Groups
+        const SonicImg = ['sonic.jpg', 'sonic2.jpg', 'sonic3.jpg', 'sonic4.jpg', 'sonic5.jpg', 'sonic6.jpg', 'sonic7.jpg'];
+        const KnucklesImg = ['kn.jpg', 'kn2.jpg', 'kn3.jpg', 'kn4.jpg', 'kn5.jpg', 'kn6.jpg', 'kn7.jpg', 'kn8.jpg'];
+        const TailsImg = ['tails.jpg', 'tails2.jpg', 'tails3.jpg', 'tails4.jpg', 'tails5.jpg', 'tails6.jpg', 'tails7.jpg', ];
+        const ShadowImg = ['shad.jpg', 'shad2.jpg', 'shad3.jpg', 'shad4.jpg', 'shad5.jpg', 'shad6.jpg', 'shad7.jpg', 'shad8.jpg', ];
 
         let currentImageIndex = 0;
+        let currentImageGroup = SonicImg; // Default group
 
-        // Get the carousel element
         const carousel = document.getElementById('carousel');
 
-        // Function to update the carousel image
         function updateImage() {
-            carousel.innerHTML = `<img src="${images[currentImageIndex]}" alt="Sonic Image ${currentImageIndex + 1}">`;
+            carousel.innerHTML = `<img src="${currentImageGroup[currentImageIndex]}" alt="Image ${currentImageIndex + 1}">`;
         }
 
-        // Left Arrow Button (Previous Image)
         document.getElementById('prev').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
             updateImage();
         });
 
-        // Right Arrow Button (Next Image)
         document.getElementById('next').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % images.length;
+            currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
             updateImage();
         });
 
-        // Change audio source when selecting different sounds
+        // Group Button Handlers
+        document.getElementById('button1').addEventListener('click', () => {
+            currentImageGroup = SonicImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button2').addEventListener('click', () => {
+            currentImageGroup = KnucklesImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button3').addEventListener('click', () => {
+            currentImageGroup = TailsImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button4').addEventListener('click', () => {
+            currentImageGroup = ShadowImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        // Audio Controls
         soundSelect.addEventListener('change', (e) => {
             audio.src = e.target.value;
-            audio.load(); // Load the new audio source
+            audio.load();
         });
 
-        // Play Button
         playButton.addEventListener('click', () => {
             audio.play();
         });
 
-        // Pause Button
         pauseButton.addEventListener('click', () => {
             audio.pause();
         });
 
-        // Stop Button
         stopButton.addEventListener('click', () => {
             audio.pause();
-            audio.currentTime = 0; // Reset audio to start
+            audio.currentTime = 0;
         });
     </script>
 </body>
