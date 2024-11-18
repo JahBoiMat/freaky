@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sit down & Relax</title>
+    <title>Veklekommen</title>
     <style>
         body {
             margin: 0;
@@ -38,6 +38,7 @@
             margin-top: 20px;
             display: flex;
             gap: 10px;
+            align-items: center;
         }
         button {
             padding: 10px 20px;
@@ -46,6 +47,19 @@
             background-color: black;
             color: white;
             border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.7);
+            transform: scale(1.1);
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
             border-radius: 5px;
         }
         .arrow {
@@ -82,6 +96,13 @@
 
     <!-- Audio Player Controls -->
     <div class="controls">
+        <select id="sound-select">
+            <option value="try.mp3">try.mp3</option>
+            <!-- You can add more sound options in the future -->
+            <option value="waka.mp3">waka.mp3</option>
+            <option value="partyrock.mp3">partyrock.mp3</option>
+            <option value="marie.mp3">marie.mp3</option>
+        </select>
         <button id="play">Play</button>
         <button id="pause">Pause</button>
         <button id="stop">Stop</button>
@@ -96,11 +117,12 @@
         const playButton = document.getElementById('play');
         const pauseButton = document.getElementById('pause');
         const stopButton = document.getElementById('stop');
+        const soundSelect = document.getElementById('sound-select');
 
         // Array of image filenames from sonic.jpg to sonic8.jpg
         const images = [
-            'sonic.jpg', 'sonic2.jpg', 'sonic3.jpg', 'sonic4.jpg',
-            'sonic5.jpg', 'sonic6.jpg', 'sonic7.jpg'
+            'sonic.jpg', 'sonic1.jpg', 'sonic2.jpg', 'sonic3.jpg',
+            'sonic4.jpg', 'sonic5.jpg', 'sonic6.jpg', 'sonic7.jpg', 'sonic8.jpg'
         ];
 
         let currentImageIndex = 0;
@@ -123,6 +145,12 @@
         document.getElementById('next').addEventListener('click', () => {
             currentImageIndex = (currentImageIndex + 1) % images.length;
             updateImage();
+        });
+
+        // Change audio source when selecting different sounds
+        soundSelect.addEventListener('change', (e) => {
+            audio.src = e.target.value;
+            audio.load(); // Load the new audio source
         });
 
         // Play Button
