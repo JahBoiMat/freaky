@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonic The Heghegpd oga aso soka mishi tanaki maki hiroshima</title>
+    <title>Fy faena as funger</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: black; /* Fallback color */
+            background-color: black;
             height: 100vh;
             overflow: hidden;
         }
@@ -19,13 +20,53 @@
             width: 100%;
             height: auto;
         }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <img src="sonic.jpg" alt="Sonic fot">
-    <audio autoplay loop>
+    <img src="sonic.jpg" alt="Fullscreen Sonic Image">
+    
+    <!-- Audio Player -->
+    <div class="controls">
+        <button id="play">Play</button>
+        <button id="pause">Pause</button>
+        <button id="stop">Stop</button>
+    </div>
+    <audio id="audio">
         <source src="try.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const playButton = document.getElementById('play');
+        const pauseButton = document.getElementById('pause');
+        const stopButton = document.getElementById('stop');
+
+        // Play Button
+        playButton.addEventListener('click', () => {
+            audio.play();
+        });
+
+        // Pause Button
+        pauseButton.addEventListener('click', () => {
+            audio.pause();
+        });
+
+        // Stop Button
+        stopButton.addEventListener('click', () => {
+            audio.pause();
+            audio.currentTime = 0; // Reset audio to start
+        });
+    </script>
 </body>
 </html>
