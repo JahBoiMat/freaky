@@ -96,7 +96,7 @@
         }
 
         /* Responsive Styles for Mobile */
-        @media (max-width: 420px) {
+        @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
@@ -137,7 +137,7 @@
 
         <!-- Image Carousel -->
         <div class="carousel" id="carousel">
-            <img src="sonic.jpg" alt="Sonic Image">
+            <img src="IMG/sonic.jpg" alt="Sonic Image">
         </div>
 
         <!-- Right Arrow -->
@@ -163,16 +163,62 @@
     </audio>
 
     <script>
+        const SonicImg = ['IMG/sonic.jpg', 'IMG/sonic2.jpg', 'IMG/sonic3.jpg', 'IMG/sonic4.jpg', 'IMG/sonic5.jpg', 'IMG/sonic6.jpg', 'IMG/sonic7.jpg'];
+        const KnucklesImg = ['IMG/kn.jpg', 'IMG/kn2.jpg', 'IMG/kn3.jpg', 'IMG/kn4.jpg', 'IMG/kn6.jpg', 'IMG/kn7.jpg', 'IMG/kn8.jpg'];
+        const TailsImg = ['IMG/tails.jpg', 'IMG/tails2.jpg', 'IMG/tails3.jpg', 'IMG/tails4.jpg', 'IMG/tails5.jpg', 'IMG/tails6.jpg', 'IMG/tails7.jpg'];
+        const ShadowImg = ['IMG/shad.jpg', 'IMG/shad2.jpg', 'IMG/shad3.jpg', 'IMG/shad5.jpg', 'IMG/shad6.jpg', 'IMG/shad7.jpg', 'IMG/shad8.jpg'];
+
+        let currentImageIndex = 0;
+        let currentImageGroup = SonicImg;
+
         const audio = document.getElementById('audio');
         const playPauseButton = document.getElementById('play-pause');
         const stopButton = document.getElementById('stop');
         const soundSelect = document.getElementById('sound-select');
         const progressBar = document.getElementById('progress-bar');
         const timeDisplay = document.getElementById('time-display');
+        const carousel = document.getElementById('carousel');
 
-        let isPaused = true; // Keeps track of the current state
+        let isPaused = true;
 
-        // Handle Play/Pause/Unpause Button
+        function updateImage() {
+            carousel.innerHTML = `<img src="${currentImageGroup[currentImageIndex]}" alt="Image ${currentImageIndex + 1}">`;
+        }
+
+        document.getElementById('prev').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
+            updateImage();
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
+            updateImage();
+        });
+
+        document.getElementById('button1').addEventListener('click', () => {
+            currentImageGroup = SonicImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button2').addEventListener('click', () => {
+            currentImageGroup = KnucklesImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button3').addEventListener('click', () => {
+            currentImageGroup = TailsImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button4').addEventListener('click', () => {
+            currentImageGroup = ShadowImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
         playPauseButton.addEventListener('click', () => {
             if (audio.paused && audio.currentTime === 0) {
                 audio.play();
@@ -189,7 +235,6 @@
             }
         });
 
-        // Handle Stop Button
         stopButton.addEventListener('click', () => {
             audio.pause();
             audio.currentTime = 0;
@@ -198,7 +243,6 @@
             updateTimeDisplay();
         });
 
-        // Handle Sound Selection
         soundSelect.addEventListener('change', (e) => {
             audio.src = e.target.value;
             audio.load();
@@ -207,7 +251,6 @@
             updateTimeDisplay();
         });
 
-        // Update Progress Bar and Time Display
         audio.addEventListener('timeupdate', () => {
             progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
             updateTimeDisplay();
@@ -227,14 +270,12 @@
             updateTimeDisplay();
         });
 
-        // Function to Update Time Display
         function updateTimeDisplay() {
             const elapsed = formatTime(audio.currentTime);
             const duration = formatTime(audio.duration || 0);
             timeDisplay.textContent = `${elapsed} / ${duration}`;
         }
 
-        // Helper Function to Format Time
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60) || 0;
             const secs = Math.floor(seconds % 60) || 0;
