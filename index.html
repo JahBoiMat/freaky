@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fy faena as funger</title>
+    <title>Image and Audio Player</title>
     <style>
         body {
             margin: 0;
@@ -14,11 +14,12 @@
             align-items: center;
             background-color: black;
             height: 100vh;
-            overflow: hidden;
+            overflow: auto; /* Allow scrolling */
         }
         img {
-            width: 100%;
-            height: auto;
+            width: 300px;  /* Set fixed width */
+            height: auto;  /* Maintain aspect ratio */
+            border: 2px solid white; /* Optional: Add a border for styling */
         }
         .controls {
             margin-top: 20px;
@@ -33,9 +34,10 @@
     </style>
 </head>
 <body>
-    <img src="sonic.jpg" alt="Fullscreen Sonic Image">
-    
-    <!-- Audio Player -->
+    <!-- Image in the center -->
+    <img src="sonic.jpg" alt="Sonic Image">
+
+    <!-- Audio Player Controls -->
     <div class="controls">
         <button id="play">Play</button>
         <button id="pause">Pause</button>
