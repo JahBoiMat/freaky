@@ -110,18 +110,18 @@
     <!-- Audio Player Controls -->
     <div class="controls">
         <select id="sound-select">
-            <option value="try.mp3">try.mp3</option>
+            <option value="SOUND/try.mp3">try.mp3</option>
             <!-- You can add more sound options in the future -->
-            <option value="waka.mp3">waka.mp3</option>
-            <option value="partyrock.mp3">partyrock.mp3</option>
-            <option value="marie.mp3">marie.mp3</option>
+            <option value="SOUND/waka.mp3">waka.mp3</option>
+            <option value="SOUND/partyrock.mp3">partyrock.mp3</option>
+            <option value="SOUND/marie.mp3">marie.mp3</option>
         </select>
         <button id="play">Play</button>
         <button id="pause">Pause</button>
         <button id="stop">Stop</button>
     </div>
     <audio id="audio">
-        <source src="try.mp3" type="audio/mpeg">
+        <source src="SOUND/try.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -133,10 +133,10 @@
         const soundSelect = document.getElementById('sound-select');
 
         // Image Groups
-        const SonicImg = ['sonic.jpg', 'sonic2.jpg', 'sonic3.jpg', 'sonic4.jpg', 'sonic5.jpg', 'sonic6.jpg', 'sonic7.jpg'];
-        const KnucklesImg = ['kn.jpg', 'kn2.jpg', 'kn3.jpg', 'kn4.jpg', 'kn5.jpg', 'kn6.jpg', 'kn7.jpg', 'kn8.jpg'];
-        const TailsImg = ['tails.jpg', 'tails2.jpg', 'tails3.jpg', 'tails4.jpg', 'tails5.jpg', 'tails6.jpg', 'tails7.jpg', ];
-        const ShadowImg = ['shad.jpg', 'shad2.jpg', 'shad3.jpg', 'shad4.jpg', 'shad5.jpg', 'shad6.jpg', 'shad7.jpg', 'shad8.jpg', ];
+        const SonicImg = ['IMG/sonic.jpg', 'IMG/sonic2.jpg', 'IMG/sonic3.jpg', 'IMG/sonic4.jpg', 'IMG/sonic5.jpg', 'IMG/sonic6.jpg', 'IMG/sonic7.jpg'];
+        const KnucklesImg = ['IMG/kn.jpg', 'IMG/kn2.jpg', 'IMG/kn3.jpg', 'IMG/kn4.jpg', 'IMG/kn5.jpg', 'IMG/kn6.jpg', 'IMG/kn7.jpg', 'IMG/kn8.jpg'];
+        const TailsImg = ['IMG/tails.jpg', 'IMG/tails2.jpg', 'IMG/tails3.jpg', 'IMG/tails4.jpg', 'IMG/tails5.jpg', 'IMG/tails6.jpg', 'IMG/tails7.jpg'];
+        const ShadowImg = ['IMG/shad.jpg', 'IMG/shad2.jpg', 'IMG/shad3.jpg', 'IMG/shad4.jpg', 'IMG/shad5.jpg', 'IMG/shad6.jpg', 'IMG/shad7.jpg', 'IMG/shad8.jpg'];
 
         let currentImageIndex = 0;
         let currentImageGroup = SonicImg; // Default group
