@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image and Audio Player</title>
+    <title>Sit down & Relax</title>
     <style>
         body {
             margin: 0;
@@ -14,12 +14,25 @@
             align-items: center;
             background-color: black;
             height: 100vh;
-            overflow: auto; /* Allow scrolling */
+            overflow: auto;
         }
-        img {
-            width: 300px;  /* Set fixed width */
-            height: auto;  /* Maintain aspect ratio */
-            border: 2px solid white; /* Optional: Add a border for styling */
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .carousel {
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            border: 2px solid white;
+            position: relative;
+        }
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .controls {
             margin-top: 20px;
@@ -30,12 +43,42 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .left-arrow {
+            left: 10px;
+        }
+        .right-arrow {
+            right: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Image in the center -->
-    <img src="sonic.jpg" alt="Sonic Image">
+    <div class="carousel-container">
+        <!-- Left Arrow -->
+        <button class="arrow left-arrow" id="prev">&lt;</button>
+
+        <!-- Image Carousel -->
+        <div class="carousel" id="carousel">
+            <img src="sonic.jpg" alt="Sonic Image">
+        </div>
+
+        <!-- Right Arrow -->
+        <button class="arrow right-arrow" id="next">&gt;</button>
+    </div>
 
     <!-- Audio Player Controls -->
     <div class="controls">
@@ -53,6 +96,34 @@
         const playButton = document.getElementById('play');
         const pauseButton = document.getElementById('pause');
         const stopButton = document.getElementById('stop');
+
+        // Array of image filenames from sonic.jpg to sonic8.jpg
+        const images = [
+            'sonic.jpg', 'sonic1.jpg', 'sonic2.jpg', 'sonic3.jpg',
+            'sonic4.jpg', 'sonic5.jpg', 'sonic6.jpg', 'sonic7.jpg', 'sonic8.jpg'
+        ];
+
+        let currentImageIndex = 0;
+
+        // Get the carousel element
+        const carousel = document.getElementById('carousel');
+
+        // Function to update the carousel image
+        function updateImage() {
+            carousel.innerHTML = `<img src="${images[currentImageIndex]}" alt="Sonic Image ${currentImageIndex + 1}">`;
+        }
+
+        // Left Arrow Button (Previous Image)
+        document.getElementById('prev').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateImage();
+        });
+
+        // Right Arrow Button (Next Image)
+        document.getElementById('next').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateImage();
+        });
 
         // Play Button
         playButton.addEventListener('click', () => {
