@@ -226,7 +226,7 @@
                 isPaused = false;
             } else if (!audio.paused && !isPaused) {
                 audio.pause();
-                playPauseButton.textContent = "Unpause";
+                playPauseButton.textContent = "Resume";
                 isPaused = true;
             } else if (isPaused) {
                 audio.play();
