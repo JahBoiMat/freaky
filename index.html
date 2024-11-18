@@ -119,8 +119,7 @@
             <option value="SOUND/partyrock.mp3">partyrock.mp3</option>
             <option value="SOUND/marie.mp3">marie.mp3</option>
         </select>
-        <button id="play">Play</button>
-        <button id="pause">Pause</button>
+        <button id="play-pause">Play</button>
         <button id="stop">Stop</button>
         <input type="range" id="progress-bar" value="0" min="0" max="100" step="0.1">
     </div>
@@ -131,79 +130,47 @@
 
     <script>
         const audio = document.getElementById('audio');
-        const playButton = document.getElementById('play');
-        const pauseButton = document.getElementById('pause');
+        const playPauseButton = document.getElementById('play-pause');
         const stopButton = document.getElementById('stop');
         const soundSelect = document.getElementById('sound-select');
         const progressBar = document.getElementById('progress-bar');
 
-        // Image Groups
-        const SonicImg = ['IMG/sonic.jpg', 'IMG/sonic2.jpg', 'IMG/sonic3.jpg', 'IMG/sonic4.jpg', 'IMG/sonic5.jpg', 'IMG/sonic6.jpg', 'IMG/sonic7.jpg'];
-        const KnucklesImg = ['IMG/kn.jpg', 'IMG/kn2.jpg', 'IMG/kn3.jpg', 'IMG/kn4.jpg', 'IMG/kn6.jpg', 'IMG/kn7.jpg', 'IMG/kn8.jpg'];
-        const TailsImg = ['IMG/tails.jpg', 'IMG/tails2.jpg', 'IMG/tails3.jpg', 'IMG/tails4.jpg', 'IMG/tails5.jpg', 'IMG/tails6.jpg', 'IMG/tails7.jpg'];
-        const ShadowImg = ['IMG/shad.jpg', 'IMG/shad2.jpg', 'IMG/shad3.jpg', 'IMG/shad5.jpg', 'IMG/shad6.jpg', 'IMG/shad7.jpg', 'IMG/shad8.jpg'];
+        let isPaused = true; // Keeps track of the current state
 
-        let currentImageIndex = 0;
-        let currentImageGroup = SonicImg;
-
-        const carousel = document.getElementById('carousel');
-
-        function updateImage() {
-            carousel.innerHTML = `<img src="${currentImageGroup[currentImageIndex]}" alt="Image ${currentImageIndex + 1}">`;
-        }
-
-        document.getElementById('prev').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
-            updateImage();
+        // Handle Play/Pause/Unpause Button
+        playPauseButton.addEventListener('click', () => {
+            if (audio.paused && audio.currentTime === 0) {
+                audio.play();
+                playPauseButton.textContent = "Pause";
+                isPaused = false;
+            } else if (!audio.paused && !isPaused) {
+                audio.pause();
+                playPauseButton.textContent = "Resume";
+                isPaused = true;
+            } else if (isPaused) {
+                audio.play();
+                playPauseButton.textContent = "Pause";
+                isPaused = false;
+            }
         });
 
-        document.getElementById('next').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
-            updateImage();
-        });
-
-        document.getElementById('button1').addEventListener('click', () => {
-            currentImageGroup = SonicImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        document.getElementById('button2').addEventListener('click', () => {
-            currentImageGroup = KnucklesImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        document.getElementById('button3').addEventListener('click', () => {
-            currentImageGroup = TailsImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        document.getElementById('button4').addEventListener('click', () => {
-            currentImageGroup = ShadowImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        soundSelect.addEventListener('change', (e) => {
-            audio.src = e.target.value;
-            audio.load();
-        });
-
-        playButton.addEventListener('click', () => {
-            audio.play();
-        });
-
-        pauseButton.addEventListener('click', () => {
-            audio.pause();
-        });
-
+        // Handle Stop Button
         stopButton.addEventListener('click', () => {
             audio.pause();
             audio.currentTime = 0;
+            playPauseButton.textContent = "Play";
+            isPaused = true;
         });
 
+        // Handle Sound Selection
+        soundSelect.addEventListener('change', (e) => {
+            audio.src = e.target.value;
+            audio.load();
+            playPauseButton.textContent = "Play";
+            isPaused = true;
+        });
+
+        // Update Progress Bar
         audio.addEventListener('timeupdate', () => {
             progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
         });
@@ -215,6 +182,8 @@
 
         audio.addEventListener('ended', () => {
             progressBar.value = 0;
+            playPauseButton.textContent = "Play";
+            isPaused = true;
         });
     </script>
 </body>
