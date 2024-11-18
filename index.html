@@ -85,7 +85,12 @@
         }
         #progress-bar {
             width: 300px;
-            margin-top: 10px;
+        }
+        .time-display {
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            margin-left: 10px;
         }
     </style>
 </head>
@@ -122,6 +127,7 @@
         <button id="play-pause">Play</button>
         <button id="stop">Stop</button>
         <input type="range" id="progress-bar" value="0" min="0" max="100" step="0.1">
+        <span class="time-display" id="time-display">0:00 / 0:00</span>
     </div>
     <audio id="audio">
         <source src="SOUND/try.mp3" type="audio/mpeg">
@@ -134,6 +140,7 @@
         const stopButton = document.getElementById('stop');
         const soundSelect = document.getElementById('sound-select');
         const progressBar = document.getElementById('progress-bar');
+        const timeDisplay = document.getElementById('time-display');
 
         let isPaused = true; // Keeps track of the current state
 
@@ -145,7 +152,7 @@
                 isPaused = false;
             } else if (!audio.paused && !isPaused) {
                 audio.pause();
-                playPauseButton.textContent = "Resume";
+                playPauseButton.textContent = "Unpause";
                 isPaused = true;
             } else if (isPaused) {
                 audio.play();
@@ -160,6 +167,7 @@
             audio.currentTime = 0;
             playPauseButton.textContent = "Play";
             isPaused = true;
+            updateTimeDisplay();
         });
 
         // Handle Sound Selection
@@ -168,11 +176,13 @@
             audio.load();
             playPauseButton.textContent = "Play";
             isPaused = true;
+            updateTimeDisplay();
         });
 
-        // Update Progress Bar
+        // Update Progress Bar and Time Display
         audio.addEventListener('timeupdate', () => {
             progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
+            updateTimeDisplay();
         });
 
         progressBar.addEventListener('input', () => {
@@ -180,11 +190,28 @@
             audio.currentTime = seekTime;
         });
 
+        audio.addEventListener('loadedmetadata', updateTimeDisplay);
+
         audio.addEventListener('ended', () => {
             progressBar.value = 0;
             playPauseButton.textContent = "Play";
             isPaused = true;
+            updateTimeDisplay();
         });
+
+        // Function to Update Time Display
+        function updateTimeDisplay() {
+            const elapsed = formatTime(audio.currentTime);
+            const duration = formatTime(audio.duration || 0);
+            timeDisplay.textContent = `${elapsed} / ${duration}`;
+        }
+
+        // Helper Function to Format Time
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60) || 0;
+            const secs = Math.floor(seconds % 60) || 0;
+            return `${mins}:${secs.toString().padStart(2, "0")}`;
+        }
     </script>
 </body>
 </html>
