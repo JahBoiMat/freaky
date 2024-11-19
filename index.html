@@ -12,7 +12,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: black;
+            background-color: pink;
             height: 100vh;
             overflow: auto;
         }
@@ -180,6 +180,32 @@
         const carousel = document.getElementById('carousel');
 
         let isPaused = true;
+
+        let startX = 0;
+let endX = 0;
+
+carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+});
+
+carousel.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].clientX;
+});
+
+carousel.addEventListener('touchend', () => {
+    const diffX = endX - startX;
+    if (diffX > 50) {
+        // Swipe Right
+        currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
+    } else if (diffX < -50) {
+        // Swipe Left
+        currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
+    }
+    updateImage();
+    startX = 0;
+    endX = 0;
+});
+
 
         function updateImage() {
             carousel.innerHTML = `<img src="${currentImageGroup[currentImageIndex]}" alt="Image ${currentImageIndex + 1}">`;
