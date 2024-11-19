@@ -12,7 +12,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-image: linear-gradient(to bottom, rgb(14, 14, 14)), rgb(20, 20, 20));
+            background-color: black;
             height: 100vh;
             overflow: auto;
         }
@@ -94,9 +94,9 @@
             font-family: Arial, sans-serif;
             font-size: 14px;
         }
+        
+        @media (max-width: 420px) {
 
-        /* Responsive Styles for Mobile */
-        @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
@@ -226,7 +226,7 @@
                 isPaused = false;
             } else if (!audio.paused && !isPaused) {
                 audio.pause();
-                playPauseButton.textContent = "Unpause";
+                playPauseButton.textContent = "Resume";
                 isPaused = true;
             } else if (isPaused) {
                 audio.play();
