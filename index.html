@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +16,12 @@
             height: 100vh;
             overflow: auto;
         }
-
         .carousel-container {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
         }
-
         .carousel {
             width: 300px;
             height: 200px;
@@ -32,13 +29,11 @@
             border: 2px solid white;
             position: relative;
         }
-
         .carousel img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .controls {
             margin-top: 20px;
             display: flex;
@@ -47,7 +42,6 @@
             align-items: center;
             justify-content: center;
         }
-
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -58,12 +52,10 @@
             border-radius: 5px;
             transition: all 0.3s ease;
         }
-
         button:hover {
             box-shadow: 0 0 10px 3px rgb(255, 71, 200);
             transform: scale(1.1);
         }
-
         select {
             padding: 10px;
             font-size: 16px;
@@ -72,7 +64,6 @@
             border: 1px solid rgb(200, 10, 127);
             border-radius: 5px;
         }
-
         .arrow {
             position: absolute;
             top: 50%;
@@ -83,50 +74,32 @@
             border: none;
             cursor: pointer;
         }
-
         .left-arrow {
             left: 10px;
         }
-
         .right-arrow {
             right: 10px;
         }
-
         .group-buttons {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-
         #progress-bar {
             width: 300px;
         }
-
         .time-display {
             color: white;
             font-family: Arial, sans-serif;
             font-size: 14px;
         }
-
-        .toggle-container {
-            margin-top: 20px;
-            text-align: center;
-            color: rgb(200, 10, 127);
-        }
-        .toggle-container .disclaimer {
-            color: rgb(200, 10, 127);
-            font-size: 12px;
-            margin-top: 5px;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
+        
         @media (max-width: 420px) {
+
             body {
                 padding: 10px;
             }
-
             .group-buttons {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
@@ -134,17 +107,14 @@
                 width: 100%;
                 justify-items: center;
             }
-
             .controls {
                 flex-direction: column;
                 align-items: stretch;
             }
-
             #progress-bar {
                 width: 100%;
                 margin-top: 10px;
             }
-
             .time-display {
                 text-align: right;
                 width: 100%;
@@ -152,7 +122,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Group Buttons -->
     <div class="group-buttons">
@@ -182,89 +151,166 @@
             <option value="SOUND/waka.mp3">waka.mp3</option>
             <option value="SOUND/partyrock.mp3">partyrock.mp3</option>
             <option value="SOUND/marie.mp3">marie.mp3</option>
+            <option value="SOUND/grind.mp3">grind.mp3</option>
+            <option value="SOUND/diva.mp3">diva.mp3</option>
+            <option value="SOUND/slomo.mp3">slomo.mp3</option>
+            <option value="SOUND/creed.mp3">creed.mp3</option>
         </select>
         <button id="play-pause">Play</button>
         <button id="stop">Stop</button>
         <input type="range" id="progress-bar" value="0" min="0" max="100" step="0.1">
         <span class="time-display" id="time-display">0:00 / 0:00</span>
     </div>
-
-    <!-- Toggle Beat Detection -->
-    <div class="toggle-container">
-        <p>Toggle Beat Detection</p>
-        <button id="toggle-beat">Enable Beat Detection</button>
-        <div class="disclaimer" id="disclaimer">Beat detection is not always accurate</div>
-    </div>
-
     <audio id="audio">
         <source src="SOUND/try.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Existing Variables and Functions
+        const SonicImg = ['IMG/sonic.jpg', 'IMG/sonic2.jpg', 'IMG/sonic3.jpg', 'IMG/sonic4.jpg', 'IMG/sonic5.jpg', 'IMG/sonic6.jpg', 'IMG/sonic7.jpg'];
+        const KnucklesImg = ['IMG/kn.jpg', 'IMG/kn2.jpg', 'IMG/kn3.jpg', 'IMG/kn4.jpg', 'IMG/kn6.jpg', 'IMG/kn7.jpg', 'IMG/kn8.jpg'];
+        const TailsImg = ['IMG/tails.jpg', 'IMG/tails2.jpg', 'IMG/tails3.jpg', 'IMG/tails4.jpg', 'IMG/tails5.jpg', 'IMG/tails6.jpg', 'IMG/tails7.jpg'];
+        const ShadowImg = ['IMG/shad.jpg', 'IMG/shad2.jpg', 'IMG/shad3.jpg', 'IMG/shad5.jpg', 'IMG/shad6.jpg', 'IMG/shad7.jpg', 'IMG/shad8.jpg'];
+
+        let currentImageIndex = 0;
+        let currentImageGroup = SonicImg;
+
         const audio = document.getElementById('audio');
         const playPauseButton = document.getElementById('play-pause');
         const stopButton = document.getElementById('stop');
         const soundSelect = document.getElementById('sound-select');
         const progressBar = document.getElementById('progress-bar');
         const timeDisplay = document.getElementById('time-display');
-        const disclaimer = document.getElementById('disclaimer');
-        const toggleButton = document.getElementById('toggle-beat');
+        const carousel = document.getElementById('carousel');
 
-        let beatDetectionEnabled = false;
+        let isPaused = true;
 
-        // Beat Detection Variables
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const audioSource = audioContext.createMediaElementSource(audio);
-        const analyser = audioContext.createAnalyser();
-        audioSource.connect(analyser);
-        analyser.connect(audioContext.destination);
+        let startX = 0;
+let endX = 0;
 
-        analyser.fftSize = 256;
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-        let lastBeatTime = 0;
+carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+});
 
-        function detectBeat() {
-            if (!beatDetectionEnabled) return;
+carousel.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].clientX;
+});
 
-            analyser.getByteFrequencyData(dataArray);
-            const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
+carousel.addEventListener('touchend', () => {
+    const diffX = endX - startX;
+    if (diffX > 50) {
+        // Swipe Right
+        currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
+    } else if (diffX < -50) {
+        // Swipe Left
+        currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
+    }
+    updateImage();
+    startX = 0;
+    endX = 0;
+});
 
-            const now = audioContext.currentTime;
-            const beatThreshold = 120; // Adjust for sensitivity
-            if (averageVolume > beatThreshold && now - lastBeatTime > 0.2) {
-                lastBeatTime = now;
-                changeImageOnBeat();
-            }
 
-            if (!audio.paused) {
-                requestAnimationFrame(detectBeat);
-            }
+        function updateImage() {
+            carousel.innerHTML = `<img src="${currentImageGroup[currentImageIndex]}" alt="Image ${currentImageIndex + 1}">`;
         }
 
-        function changeImageOnBeat() {
+        document.getElementById('prev').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
+            updateImage();
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
             currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
             updateImage();
-        }
+        });
 
-        toggleButton.addEventListener('click', () => {
-            beatDetectionEnabled = !beatDetectionEnabled;
-            toggleButton.textContent = beatDetectionEnabled ? "Disable Beat Detection" : "Enable Beat Detection";
+        document.getElementById('button1').addEventListener('click', () => {
+            currentImageGroup = SonicImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
 
-            if (beatDetectionEnabled) {
-                disclaimer.style.opacity = 1;
-                setTimeout(() => (disclaimer.style.opacity = 0), 3000);
-                detectBeat();
+        document.getElementById('button2').addEventListener('click', () => {
+            currentImageGroup = KnucklesImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button3').addEventListener('click', () => {
+            currentImageGroup = TailsImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        document.getElementById('button4').addEventListener('click', () => {
+            currentImageGroup = ShadowImg;
+            currentImageIndex = 0;
+            updateImage();
+        });
+
+        playPauseButton.addEventListener('click', () => {
+            if (audio.paused && audio.currentTime === 0) {
+                audio.play();
+                playPauseButton.textContent = "Pause";
+                isPaused = false;
+            } else if (!audio.paused && !isPaused) {
+                audio.pause();
+                playPauseButton.textContent = "Resume";
+                isPaused = true;
+            } else if (isPaused) {
+                audio.play();
+                playPauseButton.textContent = "Pause";
+                isPaused = false;
             }
         });
 
-        audio.addEventListener('play', () => {
-            audioContext.resume(); // Required for some browsers
-            if (beatDetectionEnabled) detectBeat();
+        stopButton.addEventListener('click', () => {
+            audio.pause();
+            audio.currentTime = 0;
+            playPauseButton.textContent = "Play";
+            isPaused = true;
+            updateTimeDisplay();
         });
+
+        soundSelect.addEventListener('change', (e) => {
+            audio.src = e.target.value;
+            audio.load();
+            playPauseButton.textContent = "Play";
+            isPaused = true;
+            updateTimeDisplay();
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
+            updateTimeDisplay();
+        });
+
+        progressBar.addEventListener('input', () => {
+            const seekTime = (progressBar.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+
+        audio.addEventListener('loadedmetadata', updateTimeDisplay);
+
+        audio.addEventListener('ended', () => {
+            progressBar.value = 0;
+            playPauseButton.textContent = "Play";
+            isPaused = true;
+            updateTimeDisplay();
+        });
+
+        function updateTimeDisplay() {
+            const elapsed = formatTime(audio.currentTime);
+            const duration = formatTime(audio.duration || 0);
+            timeDisplay.textContent = `${elapsed} / ${duration}`;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60) || 0;
+            const secs = Math.floor(seconds % 60) || 0;
+            return `${mins}:${secs.toString().padStart(2, "0")}`;
+        }
     </script>
 </body>
-
 </html>
