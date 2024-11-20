@@ -307,6 +307,46 @@ carousel.addEventListener('touchend', () => {
             const secs = Math.floor(seconds % 60) || 0;
             return `${mins}:${secs.toString().padStart(2, "0")}`;
         }
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const audioSource = audioContext.createMediaElementSource(audio);
+const analyser = audioContext.createAnalyser();
+audioSource.connect(analyser);
+analyser.connect(audioContext.destination);
+
+analyser.fftSize = 256;
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+let lastBeatTime = 0;
+
+function detectBeat() {
+    analyser.getByteFrequencyData(dataArray);
+    const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
+
+    const now = audioContext.currentTime;
+    const beatThreshold = 120; // Adjust this for sensitivity
+    if (averageVolume > beatThreshold && now - lastBeatTime > 0.2) {
+        lastBeatTime = now;
+        changeImageOnBeat();
+    }
+
+    if (!audio.paused) {
+        requestAnimationFrame(detectBeat);
+    }
+}
+
+function changeImageOnBeat() {
+    currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
+    updateImage();
+}
+
+// Start beat detection when audio plays
+audio.addEventListener('play', () => {
+    audioContext.resume(); // Required for some browsers
+    detectBeat();
+});
+
+        
     </script>
 </body>
 </html>
