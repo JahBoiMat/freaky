@@ -4,125 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veklekommen</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: pink;
-            height: 100vh;
-            overflow: auto;
-        }
-        .carousel-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-        .carousel {
-            width: 300px;
-            height: 200px;
-            overflow: hidden;
-            border: 2px solid white;
-            position: relative;
-        }
-        .carousel img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .controls {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: rgb(254, 171, 185);
-            color: rgb(200, 10, 127);
-            border: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        button:hover {
-            box-shadow: 0 0 10px 3px rgb(255, 71, 200);
-            transform: scale(1.1);
-        }
-        select {
-            padding: 10px;
-            font-size: 16px;
-            background-color: rgb(254, 171, 185);
-            color: rgb(200, 10, 127);
-            border: 1px solid rgb(200, 10, 127);
-            border-radius: 5px;
-        }
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(254, 171, 185, 0.5);
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        .left-arrow {
-            left: 10px;
-        }
-        .right-arrow {
-            right: 10px;
-        }
-        .group-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        #progress-bar {
-            width: 300px;
-        }
-        .time-display {
-            color: white;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-        
-        @media (max-width: 420px) {
-
-            body {
-                padding: 10px;
-            }
-            .group-buttons {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-                width: 100%;
-                justify-items: center;
-            }
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            #progress-bar {
-                width: 100%;
-                margin-top: 10px;
-            }
-            .time-display {
-                text-align: right;
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    
     <!-- Group Buttons -->
     <div class="group-buttons">
         <button id="button1">Sonic</button>
@@ -137,7 +22,7 @@
 
         <!-- Image Carousel -->
         <div class="carousel" id="carousel">
-            <img src="IMG/sonic.jpg" alt="Sonic Image">
+            <img src="media/IMG/sonic.jpg" alt="Sonic Image">
         </div>
 
         <!-- Right Arrow -->
@@ -147,16 +32,16 @@
     <!-- Audio Player Controls -->
     <div class="controls">
         <select id="sound-select">
-            <option value="SOUND/try.mp3">try.mp3</option>
-            <option value="SOUND/waka.mp3">waka.mp3</option>
-            <option value="SOUND/partyrock.mp3">partyrock.mp3</option>
-            <option value="SOUND/marie.mp3">marie.mp3</option>
-            <option value="SOUND/grind.mp3">grind.mp3</option>
-            <option value="SOUND/diva.mp3">diva.mp3</option>
-            <option value="SOUND/slomo.mp3">slomo.mp3</option>
-            <option value="SOUND/creed.mp3">creed.mp3</option>
-            <option value="SOUND/water.mp3">water.mp3</option>
-            <option value="SOUND/africa.mp3">africa.mp3</option>
+            <option value="media/SOUND/try.mp3">try.mp3</option>
+            <option value="media/SOUND/waka.mp3">waka.mp3</option>
+            <option value="media/SOUND/partyrock.mp3">partyrock.mp3</option>
+            <option value="media/SOUND/marie.mp3">marie.mp3</option>
+            <option value="media/SOUND/grind.mp3">grind.mp3</option>
+            <option value="media/SOUND/diva.mp3">diva.mp3</option>
+            <option value="media/SOUND/slomo.mp3">slomo.mp3</option>
+            <option value="media/SOUND/creed.mp3">creed.mp3</option>
+            <option value="media/SOUND/water.mp3">water.mp3</option>
+            <option value="media/SOUND/africa.mp3">africa.mp3</option>
         </select>
         <button id="play-pause">Play</button>
         <button id="stop">Stop</button>
@@ -164,155 +49,10 @@
         <span class="time-display" id="time-display">0:00 / 0:00</span>
     </div>
     <audio id="audio">
-        <source src="SOUND/try.mp3" type="audio/mpeg">
+        <source src="media/SOUND/try.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <script>
-        const SonicImg = ['IMG/sonic.jpg', 'IMG/sonic2.jpg', 'IMG/sonic3.jpg', 'IMG/sonic4.jpg', 'IMG/sonic5.jpg', 'IMG/sonic6.jpg', 'IMG/sonic7.jpg'];
-        const KnucklesImg = ['IMG/kn.jpg', 'IMG/kn2.jpg', 'IMG/kn3.jpg', 'IMG/kn4.jpg', 'IMG/kn6.jpg', 'IMG/kn7.jpg', 'IMG/kn8.jpg'];
-        const TailsImg = ['IMG/tails.jpg', 'IMG/tails2.jpg', 'IMG/tails3.jpg', 'IMG/tails4.jpg', 'IMG/tails5.jpg', 'IMG/tails6.jpg', 'IMG/tails7.jpg'];
-        const ShadowImg = ['IMG/shad.jpg', 'IMG/shad2.jpg', 'IMG/shad3.jpg', 'IMG/shad5.jpg', 'IMG/shad6.jpg', 'IMG/shad7.jpg', 'IMG/shad8.jpg'];
-
-        let currentImageIndex = 0;
-        let currentImageGroup = SonicImg;
-
-        const audio = document.getElementById('audio');
-        const playPauseButton = document.getElementById('play-pause');
-        const stopButton = document.getElementById('stop');
-        const soundSelect = document.getElementById('sound-select');
-        const progressBar = document.getElementById('progress-bar');
-        const timeDisplay = document.getElementById('time-display');
-        const carousel = document.getElementById('carousel');
-
-        let isPaused = true;
-
-        let startX = 0;
-let endX = 0;
-
-carousel.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-});
-
-carousel.addEventListener('touchmove', (e) => {
-    endX = e.touches[0].clientX;
-});
-
-carousel.addEventListener('touchend', () => {
-    const diffX = endX - startX;
-    if (diffX > 50) {
-        // Swipe Right
-        currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
-    } else if (diffX < -50) {
-        // Swipe Left
-        currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
-    }
-    updateImage();
-    startX = 0;
-    endX = 0;
-});
-
-
-        function updateImage() {
-            carousel.innerHTML = `<img src="${currentImageGroup[currentImageIndex]}" alt="Image ${currentImageIndex + 1}">`;
-        }
-
-        document.getElementById('prev').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
-            updateImage();
-        });
-
-        document.getElementById('next').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
-            updateImage();
-        });
-
-        document.getElementById('button1').addEventListener('click', () => {
-            currentImageGroup = SonicImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        document.getElementById('button2').addEventListener('click', () => {
-            currentImageGroup = KnucklesImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        document.getElementById('button3').addEventListener('click', () => {
-            currentImageGroup = TailsImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        document.getElementById('button4').addEventListener('click', () => {
-            currentImageGroup = ShadowImg;
-            currentImageIndex = 0;
-            updateImage();
-        });
-
-        playPauseButton.addEventListener('click', () => {
-            if (audio.paused && audio.currentTime === 0) {
-                audio.play();
-                playPauseButton.textContent = "Pause";
-                isPaused = false;
-            } else if (!audio.paused && !isPaused) {
-                audio.pause();
-                playPauseButton.textContent = "Resume";
-                isPaused = true;
-            } else if (isPaused) {
-                audio.play();
-                playPauseButton.textContent = "Pause";
-                isPaused = false;
-            }
-        });
-
-        stopButton.addEventListener('click', () => {
-            audio.pause();
-            audio.currentTime = 0;
-            playPauseButton.textContent = "Play";
-            isPaused = true;
-            updateTimeDisplay();
-        });
-
-        soundSelect.addEventListener('change', (e) => {
-            audio.src = e.target.value;
-            audio.load();
-            playPauseButton.textContent = "Play";
-            isPaused = true;
-            updateTimeDisplay();
-        });
-
-        audio.addEventListener('timeupdate', () => {
-            progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
-            updateTimeDisplay();
-        });
-
-        progressBar.addEventListener('input', () => {
-            const seekTime = (progressBar.value / 100) * audio.duration;
-            audio.currentTime = seekTime;
-        });
-
-        audio.addEventListener('loadedmetadata', updateTimeDisplay);
-
-        audio.addEventListener('ended', () => {
-            progressBar.value = 0;
-            playPauseButton.textContent = "Play";
-            isPaused = true;
-            updateTimeDisplay();
-        });
-
-        function updateTimeDisplay() {
-            const elapsed = formatTime(audio.currentTime);
-            const duration = formatTime(audio.duration || 0);
-            timeDisplay.textContent = `${elapsed} / ${duration}`;
-        }
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60) || 0;
-            const secs = Math.floor(seconds % 60) || 0;
-            return `${mins}:${secs.toString().padStart(2, "0")}`;
-        }
-    </script>
+    <script src="script/main.js"></script>
 </body>
 </html>
