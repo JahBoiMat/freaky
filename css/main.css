@@ -2,17 +2,18 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    font-family: Arial, sans-serif;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: pink;
-    height: 100vh;
     overflow: auto;
 }
 
 /* Top Navigation Styles */
 .topnav {
     position: sticky;
+    margin-bottom: 40px;
     top: 0;
     z-index: 1000;
     width: 100%;
@@ -128,9 +129,6 @@ select {
 }
 
 @media (max-width: 420px) {
-    body {
-        padding: 10px;
-    }
     .group-buttons {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -151,8 +149,9 @@ select {
         width: 100%;
     }
     .topnav {
-        flex-direction: column;
+        flex-direction: grid;
         gap: 10px;
+        margin-bottom: 10px;
     }
     .topnav a {
         font-size: 14px;
