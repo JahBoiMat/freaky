@@ -55,7 +55,7 @@ body {
 /* Responsive Navigation Bar */
 @media (max-width: 420px) {
     .topnav {
-        flex-direction: column;
+        flex-direction: grid;
         gap: 10px;
         margin-bottom: 10px;
     }
