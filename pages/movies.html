@@ -12,12 +12,48 @@
         <a href="../index.html">Sonic Bilder</a>
         <a href="movies.html" class="active">Filmer</a>
     </div>
-
-    <!-- Placeholder Content -->
-    <div class="content">
-        <h1>Velkommen til Filmer siden</h1>
-        <p>Her skal det lastes opp alle delene til Mathias sin love story.</p>
-        <p>Eventuelt skal det også komme kommentarer fra SELVESTE Mathias, om hvordan filmsskapingsprosessen har vært.</p>
+    <div class="title">
+        <h1>Velkommen til Sonic Filmer</h1>
+        <p>Her kan du se de verdenskjente filmene til "De som vet" studios.</p>
+        <p>Helt gratis!</p>
+    </div>
+    <!-- Video Rows -->
+    <div class="video-container">
+        <div class="video-row" onclick="toggleVideo('video1')">
+            <h2>Love Story: S1 E1</h2>
+            <p>Sonic og Andreas er i et forhold, men det blir fort trangt når en ukjent tredjepart blir involvert...</p>
+            <div class="video-player" id="video1">
+                <iframe src="../media/VIDEO/love story.mp4" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="video-row" onclick="toggleVideo('video2')">
+            <h2>Love Story: S1 E2</h2>
+            <p>Andreas Nilsen planlegger hvordan han skal hevne seg på Fredrik når han tar Sonic i å være utro...</p>
+            <div class="video-player" id="video2">
+                <iframe src="../media/VIDEO/love story 2.mp4" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="video-row" onclick="toggleVideo('video3')">
+            <h2>Love Story: S1 E3</h2>
+            <p>Etter et feilet forsøk på å utøve sin hevn på Fredrik, er Andreas på flukt og Fredrik kommer i kontakt med en skummel type...</p>
+            <div class="video-player" id="video3">
+                <iframe src="../media/VIDEO/love story 3.mp4" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="video-row" onclick="toggleVideo('video4')">
+            <h2>Love Story: S1 E4</h2>
+            <p>All hell breaks loose...</p>
+            <div class="video-player" id="video4">
+                <iframe src="../media/VIDEO/love story 4.mp4" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="video-row" onclick="toggleVideo('video4')">
+            <h2>Love Story: S2 E1</h2>
+            <p>Et uforventet tvist - Cuming soon!</p>
+            <!-- <div class="video-player" id="video4">
+                <iframe src="NULL" frameborder="0" allowfullscreen></iframe>
+            </div> -->
+        </div>
     </div>
 
     <script src="../script/movies.js"></script>
