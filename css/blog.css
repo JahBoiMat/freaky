@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Top Navigation Styles */
+.topnav {
+    position: sticky;
+    top: 0;
+    margin-bottom: 40px;
+    z-index: 1000;
+    width: 100%;
+    background: linear-gradient(90deg, #ff7eb3, #ff758c);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+}
+
+.topnav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.topnav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ff758c;
+    transform: scale(1.1);
+}
+
+.topnav a.active {
+    background-color: white;
+    color: #ff758c;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.title h1 {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.title p{
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Responsive Navigation Bar */
+@media (max-width: 420px) {
+    .topnav {
+        flex-direction: grid;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .topnav a {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    .video-player iframe {
+        height: 200px;
+    }
+}
