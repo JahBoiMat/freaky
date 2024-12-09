@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
     
-        emailjs.send('service_wteaoa3', 'template_a0k6rb9', {  
+        emailjs.send('service_pthej7c', 'template_55xof25', {  
             title: title,
             content: content,
             comments: comments,
