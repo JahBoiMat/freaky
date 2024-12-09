@@ -1,3 +1,5 @@
+emailjs.init('ZWeS_sMCdOtfWwwGG');
+
 document.addEventListener('DOMContentLoaded', () => {
     const writeBtn = document.getElementById('write-btn');
     const popupModal = document.getElementById('popup-modal');
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
     
-        emailjs.send('service_wteaoa3', 'template_hnzw8ge', {
+        emailjs.send('service_wteaoa3', 'template_lck9ekh', {
             title: title,
             content: content,
             comments: comments,
