@@ -69,6 +69,39 @@ body {
     text-align: center;
 }
 
+.section{
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: rgb(255, 236, 239);
+}
+
+.subsection {
+    background: linear-gradient(90deg,#ff758c, #ff7eb3);
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: rgb(255, 236, 239);
+}
+.subsection p{
+    color: rgb(255, 236, 239);
+    font-style: italic;
+}
+.subsection:hover {
+    background-color: rgb(255, 220, 226);
+}
+
+.subsection p.disclaimer{
+    background-image: linear-gradient(90deg, rgb(255, 30, 30), rgb(176, 0, 0));
+    color: transparent;
+    background-clip: text;
+
+}
+
 /* Responsive Navigation Bar */
 @media (max-width: 420px) {
     .topnav {
