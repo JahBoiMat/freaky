@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
     <link rel="stylesheet" href="../css/blog.css">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-    emailjs.init('hEc6yhU1_TsvV05Rb');
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "hEc6yhU1_TsvV05Rb",
+      });
+   })();
 </script>
 
 </head>
