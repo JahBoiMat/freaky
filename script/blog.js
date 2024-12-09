@@ -1,4 +1,4 @@
-emailjs.init('ZWeS_sMCdOtfWwwGG');
+emailjs.init('hEc6yhU1_TsvV05Rb');
 
 document.addEventListener('DOMContentLoaded', () => {
     const writeBtn = document.getElementById('write-btn');
