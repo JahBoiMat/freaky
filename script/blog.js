@@ -19,18 +19,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('title').value;
         const content = document.getElementById('content').value;
         const comments = document.getElementById('comments').value;
-
+    
         if (!title || !content || !comments) {
             alert('Vennligst fyll ut alle feltene før du sender.');
             return;
         }
-
-        // Log the input values (you'll replace this with the email sending logic)
-        console.log('Overskrift:', title);
-        console.log('Innhold:', content);
-        console.log('Kommentarer:', comments);
-
-        alert('Innlegget ble sendt! (Denne funksjonen er under utvikling.)');
-        popupModal.style.display = 'none';
+    
+        emailjs.send('service_wteaoa3', 'template_hnzw8ge', {
+            title: title,
+            content: content,
+            comments: comments,
+        }).then(() => {
+            alert('Innlegget ble sendt!');
+            popupModal.style.display = 'none';
+        }).catch(err => {
+            alert('Noe gikk galt. Vennligst prøv igjen.');
+            console.error(err);
+        });
     });
 });
