@@ -11,3 +11,17 @@ function toggleVideo(videoId) {
     // Toggle the clicked video player
     videoPlayer.style.display = isVisible ? 'none' : 'flex';
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video");
+
+    videos.forEach((video) => {
+        video.addEventListener("play", () => {
+            videos.forEach((v) => {
+                if (v !== video) {
+                    v.pause();
+                }
+            });
+        });
+    });
+});
