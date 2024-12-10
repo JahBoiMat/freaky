@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
     <link rel="stylesheet" href="../css/movies.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <!-- Top Navigation -->
@@ -27,7 +26,6 @@
             <div class="video-player" id="video1">
                 <iframe src="../media/VIDEO/love story.mp4" frameborder="0" allowfullscreen></iframe>
             </div>
-            <button>Anmeldelser</button> <!-- REVIEWS!! HELT ESSENSIELL -->
         </div>
         <div class="video-row" onclick="toggleVideo('video2')">
             <h2>Love Story: S1 E2</h2>
@@ -35,7 +33,6 @@
             <div class="video-player" id="video2">
                 <iframe src="../media/VIDEO/love story 2.mp4" frameborder="0" allowfullscreen></iframe>
             </div>
-            <button>Anmeldelser</button> <!-- REVIEWS!! HELT ESSENSIELL -->
         </div>
         <div class="video-row" onclick="toggleVideo('video3')">
             <h2>Love Story: S1 E3</h2>
@@ -43,7 +40,6 @@
             <div class="video-player" id="video3">
                 <iframe src="../media/VIDEO/love story 3.mp4" frameborder="0" allowfullscreen></iframe>
             </div>
-            <button>Anmeldelser</button> <!-- REVIEWS!! HELT ESSENSIELL -->
         </div>
         <div class="video-row" onclick="toggleVideo('video4')">
             <h2>Love Story: S1 E4</h2>
@@ -51,7 +47,6 @@
             <div class="video-player" id="video4">
                 <iframe src="../media/VIDEO/love story 4.mp4" frameborder="0" allowfullscreen></iframe>
             </div>
-            <button>Anmeldelser</button> <!-- REVIEWS!! HELT ESSENSIELL -->
         </div>
         <div class="video-row" onclick="toggleVideo('video4')">
             <h2>Love Story: S2 E1</h2>
@@ -59,43 +54,8 @@
             <!-- <div class="video-player" id="video4">
                 <iframe src="NULL" frameborder="0" allowfullscreen></iframe>
             </div> -->
-            <button>Anmeldelser</button> <!-- REVIEWS!! HELT ESSENSIELL -->
         </div>
     </div>
-
-    <!-- Modal for Anmeldelser -->
-    <div id="reviewsModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Anmeldelser</h2>
-            <div id="reviewsContainer">
-                <p>Legg igjen en anmeldelse i feltet under!</p>
-            </div>
-
-            <!-- ANMELDELSER HER -->
-            <div class="review">
-                <div class="review-header">
-                    <span class="reviewer-name">Anthon Berg</span>
-                    <span class="review-date">1/12 2024</span>
-                </div>
-                <div class="review-text">
-                    Fabelaktig episode! Dette er starten på noe stort, det bare vet jeg.
-                </div>
-                <div class="star-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star inactive"></i>
-                </div>
-            </div>            
-
-            <textarea id="newReview" placeholder="Write your review here..."></textarea>
-            <button id="submitReview">Kjør på</button>
-        </div>
-    </div>
-
-    
 
     <script src="../script/movies.js"></script>
 </body>
