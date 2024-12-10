@@ -1,22 +1,15 @@
 function toggleVideo(videoId) {
     const videoPlayer = document.getElementById(videoId);
-    const isVisible = videoPlayer.style.display === 'block';
-
+    const isVisible = videoPlayer.style.display === 'flex';
+    
     // Hide all video players
     const allPlayers = document.querySelectorAll('.video-player');
     allPlayers.forEach(player => {
         player.style.display = 'none';
-        const video = player.querySelector('video');
-        if (video) {
-            video.pause(); // Pause any playing video
-            video.currentTime = 0; // Reset playback
-        }
     });
 
     // Toggle the clicked video player
-    if (!isVisible) {
-        videoPlayer.style.display = 'block';
-    }
+    videoPlayer.style.display = isVisible ? 'none' : 'flex';
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     videos.forEach((video) => {
         video.addEventListener("play", () => {
-            // Pause all other videos when one starts
             videos.forEach((v) => {
                 if (v !== video) {
                     v.pause();
