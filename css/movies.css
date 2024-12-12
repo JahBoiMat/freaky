@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: pink;
+    background: linear-gradient(45deg,#564d4d, #000000);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,7 +21,7 @@ body {
     margin-bottom: 40px;
     z-index: 1000;
     width: 100%;
-    background: linear-gradient(90deg, #ff7eb3, #ff758c);
+    background: linear-gradient(180deg, #831010, #db0000);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -40,14 +40,14 @@ body {
 }
 
 .topnav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ff758c;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
     transform: scale(1.1);
 }
 
 .topnav a.active {
     background-color: white;
-    color: #ff758c;
+    color: #564d4d;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -75,7 +75,7 @@ body {
 }
 
 .video-row {
-    background: linear-gradient(90deg,#ff758c, #ff7eb3);
+    background: linear-gradient(90deg,#831010, #db0000);
     border-radius: 5px;
     margin: 10px 0;
     padding: 15px;
