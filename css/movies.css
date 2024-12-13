@@ -21,7 +21,7 @@ body {
     margin-bottom: 40px;
     z-index: 1000;
     width: 100%;
-    background: linear-gradient(180deg, #831010, #db0000);
+    background: linear-gradient(0deg, #831010, #db0000);
     display: flex;
     justify-content: space-around;
     align-items: center;
