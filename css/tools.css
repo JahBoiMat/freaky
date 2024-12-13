@@ -9,16 +9,10 @@ body {
     align-items: center;
 }
 
-.content {
-    text-align: center;
-    margin-top: 50px;
-}
-
 /* Top Navigation Styles */
 .topnav {
     position: sticky;
     top: 0;
-    margin-bottom: 40px;
     z-index: 1000;
     width: 100%;
     background: linear-gradient(0deg, #831010, #db0000);
@@ -52,34 +46,120 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Title Section */
+.title {
+    margin: 40px 0;
+    text-align: center;
+    color: #fff;
+}
+
 .title h1 {
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-align: center;
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
-.title p{
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 5px;
+.title p {
+    font-size: 18px;
     font-weight: bold;
-    text-align: center;
 }
 
-/* Responsive Navigation Bar */
+/* Tools Section */
+.tools-container {
+    max-width: 800px;
+    width: 90%;
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.tool {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.tool h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.tool p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.tool form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tool input[type="url"], 
+.tool select {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    color: #000;
+}
+
+.tool button {
+    padding: 10px 20px;
+    background-color: #db0000;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tool button:hover {
+    background-color: #a50000;
+    transform: scale(1.05);
+}
+
+#mp3-response, 
+#mp4-response {
+    margin-top: 10px;
+    color: #4caf50;
+    font-size: 16px;
+}
+
+/* Responsive Design */
 @media (max-width: 420px) {
     .topnav {
-        flex-direction: grid;
+        flex-direction: column;
         gap: 10px;
-        margin-bottom: 10px;
     }
+
     .topnav a {
         font-size: 14px;
         padding: 8px 16px;
     }
+
+    .tools-container {
+        padding: 10px;
+    }
+
+    .tool h2 {
+        font-size: 20px;
+    }
+
+    .tool p {
+        font-size: 14px;
+    }
+
+    .tool input[type="url"], 
+    .tool select {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .tool button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
 }
-
-
