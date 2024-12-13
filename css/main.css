@@ -6,7 +6,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: pink;
+    background-color: rgb(21, 21, 21);
     overflow: auto;
 }
 
@@ -30,7 +30,7 @@ body {
     top: 0;
     z-index: 1000;
     width: 100%;
-    background: linear-gradient(90deg, #ff7eb3, #ff758c);
+    background: linear-gradient(0deg, #831010, #db0000);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -49,14 +49,14 @@ body {
 }
 
 .topnav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ff758c;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
     transform: scale(1.1);
 }
 
 .topnav a.active {
     background-color: white;
-    color: #ff758c;
+    color: black;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -92,29 +92,29 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: rgb(254, 171, 185);
-    color: rgb(200, 10, 127);
+    background: linear-gradient(0deg, #831010, #db0000);
+    color: white;
     border: none;
     border-radius: 5px;
     transition: all 0.3s ease;
 }
 button:hover {
-    box-shadow: 0 0 10px 3px rgb(255, 71, 200);
+    box-shadow: 0 0 10px 3px #831010;
     transform: scale(1.1);
 }
 select {
     padding: 10px;
     font-size: 16px;
-    background-color: rgb(254, 171, 185);
-    color: rgb(200, 10, 127);
-    border: 1px solid rgb(200, 10, 127);
+    background: linear-gradient(0deg, #831010, #db0000);
+    color: black;
+    border: 01px solid #831010;
     border-radius: 5px;
 }
 .arrow {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(254, 171, 185, 0.5);
+    transform: scale(1);
+    background: linear-gradient(0deg, #831010, #db0000);
     color: white;
     padding: 10px;
     border: none;
