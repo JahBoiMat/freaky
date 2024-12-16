@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunngjøtinger</title>
+    <link rel="stylesheet" href="../css/announcements.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="topnav">
+        <a href="../index.html">Sigma Siden</a>
+        <a href="tools.html">YT-Download</a>
+        <a href="blog.html">Blog</a>
+        <a href="announcements.html" class="active">Kunngjøringer</a>
+    </div>
+
+    <h1 style="color:white;">Kunngjøringsvegg</h1>
+
+<div class="announcement-parent">
+  <div id="announcements">
+    <h2 style="color:white;">Siste Nytt!</h2>
+  </div>
+</div>
+
+  <div id="announcement-form">
+    <h2 style="color:white;">Ny Kunngjøring</h2>
+    <input type="text" id="title" placeholder="Tittel" required>
+    <input type="date" id="date" required>
+    <textarea id="content" placeholder="Kunngjøring ..." rows="4" required></textarea>
+    <button id="add-announcement">Kjør på baby</button>
+  </div>
+
+  <script src="../script/announcements.js"></script>
+</body>
