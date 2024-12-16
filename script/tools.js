@@ -35,26 +35,57 @@ function extractVideoId(url) {
     return match ? match[1] : null;
 }
 
-// Main function triggered on button click
 async function convertToMp4() {
-    const urlInput = document.getElementById('mp4-url').value; // Input YouTube URL
-    const responseDiv = document.getElementById('mp4-response'); // Response container
+    try {
+        const videoId = document.getElementById('videoIdInput').value; // Get video ID
+        const apiUrl = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`; // API endpoint
 
-    // Validate and extract the video ID
-    const videoId = extractVideoId(urlInput);
-    if (!videoId) {
-        responseDiv.textContent = "Ugyldig YouTube-lenke. Skriv inn en gyldig lenke.";
-        return;
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-host': 'yt-api.p.rapidapi.com',
+                'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08' // Replace with your valid API key
+            }
+        });
+
+        const data = await response.json();
+
+        if (data && data.link) {
+            window.open(data.link, '_blank'); // Open MP4 link
+        } else {
+            alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
+        }
+    } catch (error) {
+        console.error('Error fetching MP4 link:', error);
+        alert('En feil oppstod! Sjekk API-innstillingene.');
     }
+}
 
-    responseDiv.textContent = "Henter nedlastingslenke...";
 
-    // Fetch the download link using the API
-    const downloadLink = await fetchDownloadLink(videoId);
-    if (downloadLink) {
-        // Display the download link
-        responseDiv.innerHTML = `<a href="${downloadLink}" target="_blank">Klikk her for å laste ned videoen</a>`;
-    } else {
-        responseDiv.textContent = "Kunne ikke hente nedlastingslenke. Prøv igjen!";
+    async function convertToMp3() {
+        try {
+            const videoId = document.getElementById('videoIdInput').value; // Fetch video ID from input field
+            const apiUrl = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`; // Your API endpoint
+    
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-host': 'yt-api.p.rapidapi.com',
+                    'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08' // Replace with your valid API key
+                }
+            });
+    
+            const data = await response.json();
+    
+            if (data && data.link) {
+                window.open(data.link, '_blank'); // Opens download link in a new tab
+            } else {
+                alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
+            }
+        } catch (error) {
+            console.error('Error fetching MP3 link:', error);
+            alert('Noe gikk galt! Prøv igjen.');
+        }
     }
+    
 }
