@@ -35,6 +35,32 @@ function extractVideoId(url) {
     return match ? match[1] : null;
 }
 
+async function convertToMp3() {
+    try {
+        const videoId = document.getElementById('videoIdInput').value; // Fetch video ID from input field
+        const apiUrl = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`; // Your API endpoint
+    
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-host': 'yt-api.p.rapidapi.com',
+                'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08' // Replace with your valid API key
+            }
+        });
+    
+        const data = await response.json();
+
+        if (data && data.link) {
+            window.open(data.link, '_blank'); // Opens download link in a new tab
+        } else {
+            alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
+        }
+    } catch (error) {
+        console.error('Error fetching MP3 link:', error);
+        alert('Noe gikk galt! Prøv igjen.');
+    }
+}
+
 async function convertToMp4() {
     try {
         const videoId = document.getElementById('videoIdInput').value; // Get video ID
@@ -62,30 +88,5 @@ async function convertToMp4() {
 }
 
 
-    async function convertToMp3() {
-        try {
-            const videoId = document.getElementById('videoIdInput').value; // Fetch video ID from input field
-            const apiUrl = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`; // Your API endpoint
+
     
-            const response = await fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'x-rapidapi-host': 'yt-api.p.rapidapi.com',
-                    'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08' // Replace with your valid API key
-                }
-            });
-    
-            const data = await response.json();
-    
-            if (data && data.link) {
-                window.open(data.link, '_blank'); // Opens download link in a new tab
-            } else {
-                alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
-            }
-        } catch (error) {
-            console.error('Error fetching MP3 link:', error);
-            alert('Noe gikk galt! Prøv igjen.');
-        }
-    }
-    
-}
