@@ -3,7 +3,7 @@ async function fetchDownloadLink(videoId) {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08',
+            'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
             'x-rapidapi-host': 'yt-api.p.rapidapi.com'
         }
     };
@@ -32,26 +32,25 @@ async function fetchDownloadLink(videoId) {
 function extractVideoId(url) {
     const regex = /(?:youtube\.com\/(?:.*[?&]v=|.*\/)|youtu\.be\/)([^#&?]*)/;
     const match = url.match(regex);
-    return match ? match[1] : null;
+    const videoId = match ? match[1] : null;
+    console.log("Extracted Video ID:", videoId); // Debugging line
+    return videoId;
 }
 
 async function convertToMp3() {
+    console.log("convertToMp3 called"); // Debugging line
     try {
-        const videoId = extractVideoId(document.getElementById('mp3-url').value); // Fetch video ID from input field
-        const apiUrl = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`; // Your API endpoint
+        const videoId = extractVideoId(document.getElementById('mp3-url').value);
+        console.log("Video ID for MP3:", videoId); // Debugging line
 
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'x-rapidapi-host': 'yt-api.p.rapidapi.com',
-                'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08' // Replace with your valid API key
-            }
-        });
+        if (!videoId) {
+            alert('Ugyldig YouTube URL. Vennligst prøv igjen.');
+            return;
+        }
 
-        const data = await response.json();
-
-        if (data && data.link) {
-            window.open(data.link, '_blank'); // Opens download link in a new tab
+        const downloadLink = await fetchDownloadLink(videoId);
+        if (downloadLink) {
+            window.open(downloadLink, '_blank'); // Opens download link in a new tab
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
         }
@@ -62,22 +61,19 @@ async function convertToMp3() {
 }
 
 async function convertToMp4() {
+    console.log("convertToMp4 called"); // Debugging line
     try {
-        const videoId = extractVideoId(document.getElementById('mp4-url').value); // Get video ID
-        const apiUrl = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`; // API endpoint
+        const videoId = extractVideoId(document.getElementById('mp4-url').value);
+        console.log("Video ID for MP4:", videoId); // Debugging line
 
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'x-rapidapi-host': 'yt-api.p.rapidapi.com',
-                'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08' // Replace with your valid API key
-            }
-        });
+        if (!videoId) {
+            alert('Ugyldig YouTube URL. Vennligst prøv igjen.');
+            return;
+        }
 
-        const data = await response.json();
-
-        if (data && data.link) {
-            window.open(data.link, '_blank'); // Opens download link in a new tab
+        const downloadLink = await fetchDownloadLink(videoId);
+        if (downloadLink) {
+            window.open(downloadLink, '_blank'); // Opens download link in a new tab
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
         }

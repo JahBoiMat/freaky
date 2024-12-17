@@ -29,7 +29,7 @@
             <h2>YouTube til MP3 Converter</h2>
             <p>Kopier og lim inn en YouTube-lenke for å laste ned MP3-format.</p>
             <form id="mp3-converter-form">
-                <input type="url" id="mp3-url" placeholder="Lim inn YouTube-lenke her..." required>
+                <input type="text" id="mp3-url" placeholder="Lim inn YouTube-lenke her..." required>
                 <button type="button" onclick="convertToMp3()">Last ned MP3</button>
             </form>
             <div id="mp3-response"></div>
@@ -40,7 +40,7 @@
             <h2>YouTube til MP4 Converter</h2>
             <p>Kopier og lim inn en YouTube-lenke for å laste ned MP4-format med ønsket kvalitet.</p>
             <form id="mp4-converter-form">
-                <input type="url" id="mp4-url" placeholder="Lim inn YouTube-lenke her..." required>
+                <input type="text" id="mp4-url" placeholder="Lim inn YouTube-lenke her..." required>
                 <label for="quality">Velg Kvalitet:</label>
                 <select id="quality">
                     <option value="1080p">1080p</option>
@@ -61,6 +61,6 @@
         </div>
     </div>
 
-    <script src="../script/tools.js"></script>
+    <script src="../script/tools.js" defer></script>
 </body>
 </html>
