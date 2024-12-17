@@ -12,26 +12,33 @@ async function fetchDownloadLink(videoId) {
     const url = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`;
 
     try {
-        console.log("Fetching download link for video ID:", videoId); // Debugging line
+        console.log("Fetching download link for video ID:", videoId);
 
         // Make the API request
         const response = await fetch(url, options);
         const data = await response.json();
 
-        console.log("API Response Data:", data); // Debugging line to check response content
+        console.log("API Response Data:", data);
 
-        // Search for the video download link in adaptiveFormats or formats
+        // Debug formats structure
         const formats = data.adaptiveFormats || data.formats;
+        console.log("Available Formats:", formats);
+
+        // Check if formats contain a valid URL
         if (formats && formats.length > 0) {
-            // Extract the first valid URL
-            const downloadLink = formats[0].url;
-            console.log("Download Link Found:", downloadLink);
-            return downloadLink;
+            for (let format of formats) {
+                console.log("Checking format:", format);
+                if (format.url) {
+                    console.log("Download Link Found:", format.url);
+                    return format.url; // Return the first valid link
+                }
+            }
+            throw new Error('Fant ingen gyldige lenker i API-responsen.');
         } else {
-            throw new Error('Kunne ikke finne en gyldig nedlastingslenke.');
+            throw new Error('API-respons inneholder ingen nedlastbare formater.');
         }
     } catch (error) {
-        console.error('Error fetching download link:', error);
+        console.error('Error fetching download link:', error.message);
         return null;
     }
 }
@@ -46,11 +53,11 @@ function extractVideoId(url) {
 }
 
 async function convertToMp3() {
-    console.log("convertToMp3 called"); // Debugging line
+    console.log("convertToMp3 called");
     try {
         const urlInput = document.getElementById('mp3-url').value;
         const videoId = extractVideoId(urlInput);
-        console.log("Video ID for MP3:", videoId); // Debugging line
+        console.log("Video ID for MP3:", videoId);
 
         if (!videoId) {
             alert('Ugyldig YouTube URL. Vennligst prøv igjen.');
@@ -59,7 +66,7 @@ async function convertToMp3() {
 
         const downloadLink = await fetchDownloadLink(videoId);
         if (downloadLink) {
-            window.open(downloadLink, '_blank'); // Opens download link in a new tab
+            window.open(downloadLink, '_blank'); // Open download link
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
         }
@@ -70,11 +77,11 @@ async function convertToMp3() {
 }
 
 async function convertToMp4() {
-    console.log("convertToMp4 called"); // Debugging line
+    console.log("convertToMp4 called");
     try {
         const urlInput = document.getElementById('mp4-url').value;
         const videoId = extractVideoId(urlInput);
-        console.log("Video ID for MP4:", videoId); // Debugging line
+        console.log("Video ID for MP4:", videoId);
 
         if (!videoId) {
             alert('Ugyldig YouTube URL. Vennligst prøv igjen.');
@@ -83,7 +90,7 @@ async function convertToMp4() {
 
         const downloadLink = await fetchDownloadLink(videoId);
         if (downloadLink) {
-            window.open(downloadLink, '_blank'); // Opens download link in a new tab
+            window.open(downloadLink, '_blank'); // Open download link
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
         }
