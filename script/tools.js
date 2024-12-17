@@ -5,30 +5,11 @@ async function fetchDownloadLink(videoId, format) {
     console.log("Fetching download link for video ID:", videoId);
 
     try {
-<<<<<<< HEAD
-        // Request parameters
-        const endpoint = `https://${API_HOST}/dl?id=${videoId}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': API_KEY,
-                'X-RapidAPI-Host': API_HOST
-            }
-        };
-=======
         console.log("Fetching download link for video ID:", videoId); // Debugging line
->>>>>>> parent of a6af68a (Update tools.js)
 
         // Fetch API response
         const response = await fetch(endpoint, options);
         const data = await response.json();
-<<<<<<< HEAD
-        console.log("API Response Data:", data);
-
-        // Check if the API call was successful
-        if (data.status !== 'ok') {
-            throw new Error("API-respons inneholder ingen gyldige strømmer.");
-=======
 
         console.log("API Response Data:", data); // Debugging line to check response content
 
@@ -41,7 +22,6 @@ async function fetchDownloadLink(videoId, format) {
             return downloadLink;
         } else {
             throw new Error('Kunne ikke finne en gyldig nedlastingslenke.');
->>>>>>> parent of a6af68a (Update tools.js)
         }
 
         // Find the proper audio or video format URL
@@ -55,31 +35,13 @@ async function fetchDownloadLink(videoId, format) {
 
         throw new Error("Kunne ikke hente nedlastingslenke. Ingen gyldige strømmer funnet.");
     } catch (error) {
-<<<<<<< HEAD
-        console.error("Error fetching download link:", error.message);
-        throw error; // Re-throw the error to be caught in calling function
-=======
         console.error('Error fetching download link:', error);
         return null;
->>>>>>> parent of a6af68a (Update tools.js)
     }
 }
 
 // Convert to MP3 Function
 async function convertToMp3() {
-<<<<<<< HEAD
-    console.log("convertToMp3 called");
-
-    try {
-        const videoId = extractVideoId();
-        console.log("Extracted Video ID:", videoId);
-        
-        const downloadLink = await fetchDownloadLink(videoId, 'mp3');
-        console.log("Download link for MP3:", downloadLink);
-
-        // Trigger the download
-        window.location.href = downloadLink;
-=======
     console.log("convertToMp3 called"); // Debugging line
     try {
         const urlInput = document.getElementById('mp3-url').value;
@@ -97,7 +59,6 @@ async function convertToMp3() {
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
         }
->>>>>>> parent of a6af68a (Update tools.js)
     } catch (error) {
         alert("Kunne ikke hente nedlastingslenke. Prøv igjen!");
     }
@@ -105,19 +66,6 @@ async function convertToMp3() {
 
 // Convert to MP4 Function
 async function convertToMp4() {
-<<<<<<< HEAD
-    console.log("convertToMp4 called");
-
-    try {
-        const videoId = extractVideoId();
-        console.log("Extracted Video ID:", videoId);
-        
-        const downloadLink = await fetchDownloadLink(videoId, 'mp4');
-        console.log("Download link for MP4:", downloadLink);
-
-        // Trigger the download
-        window.location.href = downloadLink;
-=======
     console.log("convertToMp4 called"); // Debugging line
     try {
         const urlInput = document.getElementById('mp4-url').value;
@@ -135,7 +83,6 @@ async function convertToMp4() {
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
         }
->>>>>>> parent of a6af68a (Update tools.js)
     } catch (error) {
         alert("Kunne ikke hente nedlastingslenke. Prøv igjen!");
     }
