@@ -1,14 +1,13 @@
 // Function to fetch the download link using the YouTube Media Downloader API
-async function fetchDownloadLink(videoId) {
+async function fetchDownloadLink(videoId, type = 'audio') {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
+            'X-RapidAPI-Key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your API key
             'X-RapidAPI-Host': 'youtube-media-downloader.p.rapidapi.com',
         },
     };
 
-    // Construct the API URL (using the correct API endpoint)
     const url = `https://youtube-media-downloader.p.rapidapi.com/v2/video/details?videoId=${videoId}`;
 
     try {
@@ -20,18 +19,21 @@ async function fetchDownloadLink(videoId) {
 
         console.log("API Response Data:", data);
 
-        // Check for the presence of a valid download URL
-        if (data && data.streams && data.streams.length > 0) {
-            // Retrieve the first valid stream with a URL
-            const downloadStream = data.streams.find(stream => stream.url);
-            if (downloadStream && downloadStream.url) {
-                console.log("Download Link Found:", downloadStream.url);
-                return downloadStream.url;
-            } else {
-                throw new Error('Ingen gyldige nedlastingslenker funnet i strømmer.');
-            }
+        // Determine where to search based on type (audio or video)
+        let items = [];
+        if (type === 'audio' && data.audios && data.audios.items) {
+            items = data.audios.items;
+        } else if (type === 'video' && data.videos && data.videos.items) {
+            items = data.videos.items;
+        }
+
+        // Find the first item with a valid URL
+        const downloadItem = items.find(item => item.url);
+        if (downloadItem) {
+            console.log("Download Link Found:", downloadItem.url);
+            return downloadItem.url;
         } else {
-            throw new Error('API-respons inneholder ingen gyldige strømmer.');
+            throw new Error('Ingen gyldige nedlastingslenker funnet.');
         }
     } catch (error) {
         console.error('Error fetching download link:', error.message);
@@ -61,7 +63,7 @@ async function convertToMp3() {
             return;
         }
 
-        const downloadLink = await fetchDownloadLink(videoId);
+        const downloadLink = await fetchDownloadLink(videoId, 'audio');
         if (downloadLink) {
             console.log("Opening Download Link:", downloadLink);
             window.open(downloadLink, '_blank'); // Open download link
@@ -87,7 +89,7 @@ async function convertToMp4() {
             return;
         }
 
-        const downloadLink = await fetchDownloadLink(videoId);
+        const downloadLink = await fetchDownloadLink(videoId, 'video');
         if (downloadLink) {
             console.log("Opening Download Link:", downloadLink);
             window.open(downloadLink, '_blank'); // Open download link
