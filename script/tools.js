@@ -4,43 +4,21 @@ async function fetchDownloadLink(videoId) {
         method: 'GET',
         headers: {
             'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
-            'x-rapidapi-host': 'yt-api.p.rapidapi.com'async function fetchDownloadLink(videoId) {
-    const options = {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
-            'x-rapidapi-host': 'yt-api.p.rapidapi.com'
-        }
-    };
-
-    const url = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`;
-
-    try {
-        const response = await fetch(url, options);
-        console.log("API Response Status:", response.status); // Log the response status
-        const data = await response.json();
-        console.log("API Response Data:", data); // Log the response data
-
-        if (data && data.link) {
-            return data.link;
-        } else {
-            throw new Error('Kunne ikke hente nedlastingslenke. Prøv igjen!');
-        }
-    } catch (error) {
-        console.error('Error fetching download link:', error);
-        return null;
-    }
-}
-        }
+            'x-rapidapi-host': 'yt-api.p.rapidapi.com',
+        },
     };
 
     // Construct the API URL
     const url = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`;
 
     try {
+        console.log("Fetching download link for video ID:", videoId); // Debugging line
+
         // Make the API request
         const response = await fetch(url, options);
         const data = await response.json();
+
+        console.log("API Response Data:", data); // Debugging line to check response content
 
         // Check if the API returned a valid download link
         if (data && data.link) {
@@ -66,7 +44,8 @@ function extractVideoId(url) {
 async function convertToMp3() {
     console.log("convertToMp3 called"); // Debugging line
     try {
-        const videoId = extractVideoId(document.getElementById('mp3-url').value);
+        const urlInput = document.getElementById('mp3-url').value;
+        const videoId = extractVideoId(urlInput);
         console.log("Video ID for MP3:", videoId); // Debugging line
 
         if (!videoId) {
@@ -89,7 +68,8 @@ async function convertToMp3() {
 async function convertToMp4() {
     console.log("convertToMp4 called"); // Debugging line
     try {
-        const videoId = extractVideoId(document.getElementById('mp4-url').value);
+        const urlInput = document.getElementById('mp4-url').value;
+        const videoId = extractVideoId(urlInput);
         console.log("Video ID for MP4:", videoId); // Debugging line
 
         if (!videoId) {
