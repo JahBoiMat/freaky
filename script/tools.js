@@ -4,7 +4,33 @@ async function fetchDownloadLink(videoId) {
         method: 'GET',
         headers: {
             'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
+            'x-rapidapi-host': 'yt-api.p.rapidapi.com'async function fetchDownloadLink(videoId) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
             'x-rapidapi-host': 'yt-api.p.rapidapi.com'
+        }
+    };
+
+    const url = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`;
+
+    try {
+        const response = await fetch(url, options);
+        console.log("API Response Status:", response.status); // Log the response status
+        const data = await response.json();
+        console.log("API Response Data:", data); // Log the response data
+
+        if (data && data.link) {
+            return data.link;
+        } else {
+            throw new Error('Kunne ikke hente nedlastingslenke. Prøv igjen!');
+        }
+    } catch (error) {
+        console.error('Error fetching download link:', error);
+        return null;
+    }
+}
         }
     };
 
