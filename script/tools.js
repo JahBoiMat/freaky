@@ -1,15 +1,15 @@
-// Function to fetch the download link using the YT-API
+// Function to fetch the download link using the YouTube Media Downloader API
 async function fetchDownloadLink(videoId) {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
-            'x-rapidapi-host': 'yt-api.p.rapidapi.com',
+            'X-RapidAPI-Key': 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08', // Replace with your valid API key
+            'X-RapidAPI-Host': 'youtube-media-downloader.p.rapidapi.com',
         },
     };
 
-    // Construct the API URL
-    const url = `https://yt-api.p.rapidapi.com/dl?id=${videoId}`;
+    // Construct the API URL (using the correct API endpoint)
+    const url = `https://youtube-media-downloader.p.rapidapi.com/v2/video/details?videoId=${videoId}`;
 
     try {
         console.log("Fetching download link for video ID:", videoId);
@@ -20,22 +20,18 @@ async function fetchDownloadLink(videoId) {
 
         console.log("API Response Data:", data);
 
-        // Debug formats structure
-        const formats = data.adaptiveFormats || data.formats;
-        console.log("Available Formats:", formats);
-
-        // Check if formats contain a valid URL
-        if (formats && formats.length > 0) {
-            for (let format of formats) {
-                console.log("Checking format:", format);
-                if (format.url) {
-                    console.log("Download Link Found:", format.url);
-                    return format.url; // Return the first valid link
-                }
+        // Check for the presence of a valid download URL
+        if (data && data.streams && data.streams.length > 0) {
+            // Retrieve the first valid stream with a URL
+            const downloadStream = data.streams.find(stream => stream.url);
+            if (downloadStream && downloadStream.url) {
+                console.log("Download Link Found:", downloadStream.url);
+                return downloadStream.url;
+            } else {
+                throw new Error('Ingen gyldige nedlastingslenker funnet i strømmer.');
             }
-            throw new Error('Fant ingen gyldige lenker i API-responsen.');
         } else {
-            throw new Error('API-respons inneholder ingen nedlastbare formater.');
+            throw new Error('API-respons inneholder ingen gyldige strømmer.');
         }
     } catch (error) {
         console.error('Error fetching download link:', error.message);
@@ -52,6 +48,7 @@ function extractVideoId(url) {
     return videoId;
 }
 
+// Function to handle MP3 conversion
 async function convertToMp3() {
     console.log("convertToMp3 called");
     try {
@@ -66,6 +63,7 @@ async function convertToMp3() {
 
         const downloadLink = await fetchDownloadLink(videoId);
         if (downloadLink) {
+            console.log("Opening Download Link:", downloadLink);
             window.open(downloadLink, '_blank'); // Open download link
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
@@ -76,6 +74,7 @@ async function convertToMp3() {
     }
 }
 
+// Function to handle MP4 conversion
 async function convertToMp4() {
     console.log("convertToMp4 called");
     try {
@@ -90,6 +89,7 @@ async function convertToMp4() {
 
         const downloadLink = await fetchDownloadLink(videoId);
         if (downloadLink) {
+            console.log("Opening Download Link:", downloadLink);
             window.open(downloadLink, '_blank'); // Open download link
         } else {
             alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
