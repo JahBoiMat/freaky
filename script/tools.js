@@ -1,85 +1,150 @@
-const API_KEY = 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08'; // Replace this with your YTStream RapidAPI key
+const API_KEY = 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08'; // Replace with your YTStream RapidAPI Key
 const API_HOST = 'ytstream-download-youtube-videos.p.rapidapi.com';
 
-// Function to extract video ID from a full YouTube URL
-function extractVideoId() {
-    const videoUrl = document.getElementById('videoUrl').value;
-
-    try {
-        const urlParams = new URLSearchParams(new URL(videoUrl).search);
-        const videoId = urlParams.get('v');
-
-        if (!videoId) throw new Error("Video ID could not be extracted. Check the YouTube URL format.");
-        
-        console.log("Extracted Video ID:", videoId);
-        return videoId;
-    } catch (error) {
-        console.error("Error extracting video ID:", error.message);
-        alert("Invalid YouTube URL. Please enter a correct URL.");
-    }
-}
-
-// Function to fetch and return download links from YTStream API
 async function fetchDownloadLink(videoId, format) {
-    console.log("Fetching download link for:", videoId, "| Format:", format);
-
-    const endpoint = `https://${API_HOST}/dl?id=${videoId}`;
-    const headers = {
-        'X-RapidAPI-Key': API_KEY,
-        'X-RapidAPI-Host': API_HOST
-    };
+    console.log("Fetching download link for video ID:", videoId);
 
     try {
-        const response = await fetch(endpoint, { method: 'GET', headers });
+<<<<<<< HEAD
+        // Request parameters
+        const endpoint = `https://${API_HOST}/dl?id=${videoId}`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': API_KEY,
+                'X-RapidAPI-Host': API_HOST
+            }
+        };
+=======
+        console.log("Fetching download link for video ID:", videoId); // Debugging line
+>>>>>>> parent of a6af68a (Update tools.js)
+
+        // Fetch API response
+        const response = await fetch(endpoint, options);
         const data = await response.json();
+<<<<<<< HEAD
+        console.log("API Response Data:", data);
 
-        console.log("YTStream API Response:", data);
-
+        // Check if the API call was successful
         if (data.status !== 'ok') {
-            throw new Error("API response status not OK. Could not fetch stream links.");
+            throw new Error("API-respons inneholder ingen gyldige strømmer.");
+=======
+
+        console.log("API Response Data:", data); // Debugging line to check response content
+
+        // Search for the video download link in adaptiveFormats or formats
+        const formats = data.adaptiveFormats || data.formats;
+        if (formats && formats.length > 0) {
+            // Extract the first valid URL
+            const downloadLink = formats[0].url;
+            console.log("Download Link Found:", downloadLink);
+            return downloadLink;
+        } else {
+            throw new Error('Kunne ikke finne en gyldig nedlastingslenke.');
+>>>>>>> parent of a6af68a (Update tools.js)
         }
 
-        // Find the right format link (audio for MP3, mp4 for video)
+        // Find the proper audio or video format URL
         if (format === 'mp3') {
-            const audioLink = data.links.audio?.[0]?.url; // Prioritize first MP3 link
-            if (audioLink) return audioLink;
+            const audioStream = data.links.audio?.[0]?.url; // Get the first audio URL
+            if (audioStream) return audioStream;
         } else if (format === 'mp4') {
-            const videoLink = data.links.mp4?.[0]?.url;
-            if (videoLink) return videoLink;
+            const videoStream = data.links.mp4?.[0]?.url; // Get the first MP4 URL
+            if (videoStream) return videoStream;
         }
 
-        throw new Error(`No valid ${format} stream found.`);
+        throw new Error("Kunne ikke hente nedlastingslenke. Ingen gyldige strømmer funnet.");
     } catch (error) {
+<<<<<<< HEAD
         console.error("Error fetching download link:", error.message);
-        alert("Failed to retrieve the download link. Please try again.");
+        throw error; // Re-throw the error to be caught in calling function
+=======
+        console.error('Error fetching download link:', error);
         return null;
+>>>>>>> parent of a6af68a (Update tools.js)
     }
 }
 
-// Trigger MP3 Download
+// Convert to MP3 Function
 async function convertToMp3() {
+<<<<<<< HEAD
     console.log("convertToMp3 called");
 
-    const videoId = extractVideoId();
-    if (!videoId) return;
+    try {
+        const videoId = extractVideoId();
+        console.log("Extracted Video ID:", videoId);
+        
+        const downloadLink = await fetchDownloadLink(videoId, 'mp3');
+        console.log("Download link for MP3:", downloadLink);
 
-    const downloadLink = await fetchDownloadLink(videoId, 'mp3');
-    if (downloadLink) {
-        console.log("MP3 Download Link:", downloadLink);
-        window.open(downloadLink, "_blank"); // Trigger download in a new tab
+        // Trigger the download
+        window.location.href = downloadLink;
+=======
+    console.log("convertToMp3 called"); // Debugging line
+    try {
+        const urlInput = document.getElementById('mp3-url').value;
+        const videoId = extractVideoId(urlInput);
+        console.log("Video ID for MP3:", videoId); // Debugging line
+
+        if (!videoId) {
+            alert('Ugyldig YouTube URL. Vennligst prøv igjen.');
+            return;
+        }
+
+        const downloadLink = await fetchDownloadLink(videoId);
+        if (downloadLink) {
+            window.open(downloadLink, '_blank'); // Opens download link in a new tab
+        } else {
+            alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
+        }
+>>>>>>> parent of a6af68a (Update tools.js)
+    } catch (error) {
+        alert("Kunne ikke hente nedlastingslenke. Prøv igjen!");
     }
 }
 
-// Trigger MP4 Download
+// Convert to MP4 Function
 async function convertToMp4() {
+<<<<<<< HEAD
     console.log("convertToMp4 called");
 
-    const videoId = extractVideoId();
-    if (!videoId) return;
+    try {
+        const videoId = extractVideoId();
+        console.log("Extracted Video ID:", videoId);
+        
+        const downloadLink = await fetchDownloadLink(videoId, 'mp4');
+        console.log("Download link for MP4:", downloadLink);
 
-    const downloadLink = await fetchDownloadLink(videoId, 'mp4');
-    if (downloadLink) {
-        console.log("MP4 Download Link:", downloadLink);
-        window.open(downloadLink, "_blank"); // Trigger download in a new tab
+        // Trigger the download
+        window.location.href = downloadLink;
+=======
+    console.log("convertToMp4 called"); // Debugging line
+    try {
+        const urlInput = document.getElementById('mp4-url').value;
+        const videoId = extractVideoId(urlInput);
+        console.log("Video ID for MP4:", videoId); // Debugging line
+
+        if (!videoId) {
+            alert('Ugyldig YouTube URL. Vennligst prøv igjen.');
+            return;
+        }
+
+        const downloadLink = await fetchDownloadLink(videoId);
+        if (downloadLink) {
+            window.open(downloadLink, '_blank'); // Opens download link in a new tab
+        } else {
+            alert('Kunne ikke hente nedlastingslenke. Prøv igjen!');
+        }
+>>>>>>> parent of a6af68a (Update tools.js)
+    } catch (error) {
+        alert("Kunne ikke hente nedlastingslenke. Prøv igjen!");
     }
+}
+
+// Helper Function to Extract Video ID from URL
+function extractVideoId() {
+    const videoUrl = document.getElementById('videoUrl').value;
+    const urlParams = new URLSearchParams(new URL(videoUrl).search);
+    const videoId = urlParams.get('v');
+    return videoId;
 }
