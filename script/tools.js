@@ -20,11 +20,15 @@ async function fetchDownloadLink(videoId) {
 
         console.log("API Response Data:", data); // Debugging line to check response content
 
-        // Check if the API returned a valid download link
-        if (data && data.link) {
-            return data.link;
+        // Search for the video download link in adaptiveFormats or formats
+        const formats = data.adaptiveFormats || data.formats;
+        if (formats && formats.length > 0) {
+            // Extract the first valid URL
+            const downloadLink = formats[0].url;
+            console.log("Download Link Found:", downloadLink);
+            return downloadLink;
         } else {
-            throw new Error('Kunne ikke hente nedlastingslenke. Prøv igjen!');
+            throw new Error('Kunne ikke finne en gyldig nedlastingslenke.');
         }
     } catch (error) {
         console.error('Error fetching download link:', error);
