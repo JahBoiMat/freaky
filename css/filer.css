@@ -65,6 +65,10 @@ body {
     justify-content: space-around;
 }
 
+.outbound{
+  margin: 10px;
+}
+
 button {
     position: relative;
     padding: 10px 20px;
