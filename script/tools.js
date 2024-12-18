@@ -1,3 +1,6 @@
+
+//Youtube downloader section funker ikke for svarte helvete
+
 const API_KEY = 'cd552d3922mshb219b89bca3e32bp102a92jsn595b1d473a08'; // Replace with your YTStream RapidAPI Key
 const API_HOST = 'ytstream-download-youtube-videos.p.rapidapi.com';
 

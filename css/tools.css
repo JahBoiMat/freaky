@@ -131,10 +131,10 @@ body {
 /* Responsive Design */
 @media (max-width: 420px) {
     .topnav {
-        flex-direction: column;
+        flex-direction: grid;
         gap: 10px;
+        margin-bottom: 10px;
     }
-
     .topnav a {
         font-size: 14px;
         padding: 8px 16px;
@@ -163,3 +163,5 @@ body {
         font-size: 14px;
     }
 }
+   
+
