@@ -65,8 +65,8 @@ body {
     justify-content: space-around;
 }
 
-.outbound{
-  margin: 10px;
+.a{
+  cursor: pointer;
 }
 
 button {
