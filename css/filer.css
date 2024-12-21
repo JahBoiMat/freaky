@@ -141,6 +141,57 @@ button {
     -moz-transition: box-shadow 0.2s ease-in;
     transition: box-shadow 0.2s ease-in;
   }
+
+  /* Sponsor Section Styles */
+.sponsor-container {
+  background-color: #222;
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 600px;
+  color: #fff;
+  border: 1px solid #f52a2a
+}
+
+.sponsor-heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #db0000;
+}
+
+.sponsor-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.sponsor-link {
+  color: #db0000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sponsor-link:hover {
+  text-decoration: underline;
+}
+
+.sponsor-button {
+  padding: 12px 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #db0000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sponsor-button:hover {
+  background-color: #831010;
+}
+
   
 /* Responsive Design */
 @media (max-width: 420px) {
