@@ -1,7 +1,7 @@
-const SonicImg = ['media/IMG/sonic.jpg', 'media/IMG/sonic2.jpg', 'media/IMG/sonic3.jpg', 'media/IMG/sonic4.jpg', 'media/IMG/sonic5.jpg', 'media/IMG/sonic6.jpg', 'media/IMG/sonic7.jpg'];
-const KnucklesImg = ['media/IMG/kn.jpg', 'media/IMG/kn2.jpg', 'media/IMG/kn3.jpg', 'media/IMG/kn4.jpg', 'media/IMG/kn6.jpg', 'media/IMG/kn7.jpg', 'media/IMG/kn8.jpg'];
-const TailsImg = ['media/IMG/tails.jpg', 'media/IMG/tails2.jpg', 'media/IMG/tails3.jpg', 'media/IMG/tails4.jpg', 'media/IMG/tails5.jpg', 'media/IMG/tails6.jpg', 'media/IMG/tails7.jpg'];
-const ShadowImg = ['media/IMG/shad.jpg', 'media/IMG/shad2.jpg', 'media/IMG/shad3.jpg', 'media/IMG/shad5.jpg', 'media/IMG/shad6.jpg', 'media/IMG/shad7.jpg', 'media/IMG/shad8.jpg'];
+const SonicImg = [''];
+const KnucklesImg = [''];
+const TailsImg = [''];
+const ShadowImg = [''];
 
 let currentImageIndex = 0;
 let currentImageGroup = SonicImg;
